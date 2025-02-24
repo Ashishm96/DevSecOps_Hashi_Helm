@@ -23,6 +23,8 @@ spec:
           value: "{{ .Values.vault.addr }}"  
         - name: VAULT_EXTERNAL_ADDR
           value: "{{ .Values.vault.externalAddr }}"  
+        - name: VAULT_API_ADDR
+          value: "https://vault:8200"
         - name: VAULT_TLS_CERT_FILE
           value: /vault/certs/tls.crt
         - name: VAULT_TLS_KEY_FILE
@@ -31,7 +33,8 @@ spec:
         volumeMounts:
         - name: vault-config
           mountPath: /etc/vault.d
-          readOnly: true # Config should be read-only
+          #readOnly: true # Config should be read-only
+          defaultMode: 420  # Ensure the default permissions are suitable
         - name: vault-ssl-cert
           mountPath: /vault/certs
           readOnly: true 
@@ -42,6 +45,8 @@ spec:
         args: ["server", "-config=/etc/vault.d/vault.hcl"]
 
         securityContext:
+          runAsUser: 1000  # or whichever user Vault should run as
+          fsGroup: 1000    # Group ownership for the file system
           capabilities:
             add:
               - IPC_LOCK  
