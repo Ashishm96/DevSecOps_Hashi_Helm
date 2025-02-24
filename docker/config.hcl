@@ -3,16 +3,12 @@ storage "file" {
   path = "/vault/data"
 }
 
-# Listener configuration
-#listener "tcp" {
-#  address     = "0.0.0.0:8200"
-#  tls_disable = "false"  # Only for local testing, not recommended in production
-#}
+#Listener configuration
 listener "tcp" {
   address     = "0.0.0.0:8200"
-  tls_cert_file = "/vault/certs/tls.crt"
-  tls_key_file  = "/vault/certs/tls.key"
+  tls_disable = "false"  # Only for local testing, not recommended in production
 }
+
 
 
 # Enable the Vault UI
