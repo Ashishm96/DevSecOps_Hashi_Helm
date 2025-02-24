@@ -162,6 +162,7 @@ jobs:
           sleep 5  
           curl -k http://localhost:8200/v1/sys/health
             kill $FORWARD_PID
+            
       # Step: Delete Older Docker Images from JFrog
       - name: Delete Older Docker Images from JFrog
         run: |
