@@ -30,8 +30,10 @@ spec:
 
         volumeMounts:
         - name: vault-config
-          mountPath: /etc/vault.d
-          readOnly: false  # Config should be read-only
+          #mountPath: /etc/vault.d
+          #readOnly: false  # Config should be read-only
+          mountPath: /vault/config  # This should match the directory in the configMap
+          readOnly: false
         - name: vault-ssl-cert
           mountPath: /vault/certs
           readOnly: true 
