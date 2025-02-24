@@ -19,33 +19,44 @@ spec:
         ports:
         - containerPort: {{ .Values.service.port }}
         env:
-          - name: VAULT_ADDR
-            value: "{{ .Values.vault.addr }}"  # Internal Vault Address for cluster
-          - name: VAULT_EXTERNAL_ADDR
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP  # This automatically sets the external address to the Node IP.
+        - name: VAULT_ADDR
+          value: "{{ .Values.vault.addr }}"  
+        - name: VAULT_EXTERNAL_ADDR
+          value: "{{ .Values.vault.externalAddr }}"  
+        - name: VAULT_TLS_CERT_FILE
+          value: /vault/certs/tls.crt
+        - name: VAULT_TLS_KEY_FILE
+          value: /vault/certs/tls.key 
+
         volumeMounts:
         - name: vault-config
-          mountPath: /vault/config  # Change from /etc/vault.d to /vault/config
+          mountPath: /etc/vault.d
+          readOnly: false  # Config should be read-only
         - name: vault-ssl-cert
           mountPath: /vault/certs
-          readOnly: true  # Ensure certificates are read-only
+          readOnly: true 
         - name: vault-data
-          mountPath: /vault/data  # Mount persistent storage for Vault data
+          mountPath: /vault/data  
+
+        command: ["vault"]
+        args: ["server", "-config=/etc/vault.d/vault.hcl"]
+
         securityContext:
           capabilities:
             add:
-              - IPC_LOCK  # Add IPC_LOCK capability to prevent Vault from swapping
+              - IPC_LOCK  
+
       volumes:
       - name: vault-config
         configMap:
           name: vault-config
+        #persistentVolumeClaim:
+        #  claimName: vault-pvc  # ✅ Now using PVC instead of ConfigMap
       - name: vault-ssl-cert
         secret:
-          secretName: vault-ssl-cert  # Secret containing SSL certs (created beforehand)
+          secretName: vault-ssl-cert  
       - name: vault-data
         persistentVolumeClaim:
-          claimName: vault-pvc  # Persistent volume claim for Vault data storage
+          claimName: vault-pvc  
       imagePullSecrets:
-      - name: jfrog-registry-secret  # If using a private registry
+      - name: jfrog-registry-secret  
