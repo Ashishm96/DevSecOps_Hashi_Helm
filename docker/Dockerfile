@@ -1,4 +1,4 @@
-# Use the official HashiCorp Vault image with a specified version
+0# Use the official HashiCorp Vault image with a specified version
 FROM docker.io/hashicorp/vault:1.21.2
 
 # Set working directory

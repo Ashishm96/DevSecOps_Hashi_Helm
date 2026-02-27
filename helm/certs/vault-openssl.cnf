@@ -13,4 +13,7 @@ subjectAltName = @alt_names
 
 [alt_names]
 DNS.1 = vault.minikube.local
-IP.1 = 192.168.49.2  # Replace with your Minikube IP
+DNS.2 = vault
+DNS.3 = vault.vault-deployment.svc
+DNS.4 = vault.vault-deployment.svc.cluster.local
+IP.1  = 192.168.49.2

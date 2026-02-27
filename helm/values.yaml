@@ -3,7 +3,7 @@ replicaCount: 1
 
 # Image configuration for the Vault server
 image:
-  repository: trialp14fhd.jfrog.io/vault-repo/vault-server
+  repository: trialo7us27.jfrog.io/vault-repo/vault-server
   tag: "latest"
   pullPolicy: IfNotPresent
 
@@ -14,7 +14,7 @@ service:
   #nodePort: 32000  # Ensure this is set to a valid NodePort range (30000-32767)
 
 vault:
-  addr: "https://vault.minikube.local"  # Replace <minikube-ip> with the actual IP
+  addr: "https://vault.vault-deployment.svc.cluster.local:8200"  # Replace <minikube-ip> with the actual IP
   externalAddr: "https://vault.minikube.local"
 
 # Storage configuration for Vault

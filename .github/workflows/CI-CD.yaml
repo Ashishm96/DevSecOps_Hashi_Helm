@@ -26,7 +26,7 @@ jobs:
     runs-on: self-hosted
     needs: validate
     env:
-      JFROG_REGISTRY: "trialp14fhd.jfrog.io"
+      JFROG_REGISTRY: "trialo7us27.jfrog.io"
       JFROG_REPO: "vault-repo"
       IMAGE_NAME: "vault-server"
     steps:
@@ -51,7 +51,7 @@ jobs:
     runs-on: self-hosted
     needs: build
     env:
-      JFROG_REGISTRY: "trialp14fhd.jfrog.io"
+      JFROG_REGISTRY: "trialo7us27.jfrog.io"
       JFROG_REPO: "vault-repo"
       IMAGE_NAME: "vault-server"
     steps:
@@ -81,7 +81,7 @@ jobs:
     runs-on: self-hosted
     needs: push
     env:
-      JFROG_REGISTRY: "trialp14fhd.jfrog.io"
+      JFROG_REGISTRY: "trialo7us27.jfrog.io"
       JFROG_REPO: "vault-repo"
       IMAGE_NAME: "vault-server"
       IMAGE_TAG: "${{ github.run_number }}-$(date +'%Y%m%d')"
@@ -112,7 +112,7 @@ jobs:
     runs-on: self-hosted
     needs: vulnerability_check
     env:
-      JFROG_REGISTRY: "trialp14fhd.jfrog.io"
+      JFROG_REGISTRY: "trialo7us27.jfrog.io"
       JFROG_REPO: "vault-repo"
       IMAGE_NAME: "vault-server"
       K8S_NAMESPACE: "vault-deployment"
@@ -200,7 +200,7 @@ jobs:
     runs-on: self-hosted
     needs: monitoring
     env:
-      JFROG_REGISTRY: "trialp14fhd.jfrog.io"
+      JFROG_REGISTRY: "trialo7us27.jfrog.io"
       JFROG_REPO: "vault-repo"
       IMAGE_NAME: "vault-server"
     steps:
